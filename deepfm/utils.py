@@ -4,24 +4,6 @@ import pandas as pd
 from tqdm.notebook import tqdm
 
 
-def category_encode(
-    category_df: pd.DataFrame, fillna_value: str = "#nan"
-) -> tuple[dict[str, dict[str, int]], pd.DataFrame]:
-    category2idx_dict = dict()
-    category_features = []
-    for category_column in category_df.columns:
-        category2idx = {
-            h: i for i, h in enumerate(sorted(list(set(category_df[category_column].fillna(fillna_value)))))
-        }
-        category_feature = (
-            category_df[category_column].fillna(fillna_value).map(category2idx).astype(int)
-        )
-        category2idx_dict[category_column] = category2idx
-        category_features.append(category_feature)
-    category_features = pd.concat(category_features, axis=1)
-    return category2idx_dict, category_features
-
-
 def split_train_val_test(data_dir: pathlib.Path, save_dir: pathlib.Path):
     assert data_dir.exists()
     assert save_dir.exists()
