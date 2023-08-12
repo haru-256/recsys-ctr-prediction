@@ -3,8 +3,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+url = "https://download.pytorch.org/whl/cpu"
+verify_ssl = true
+name = "pytorch"
+
 [packages]
-torch = "*"
+# torch = {version="*", index="pytorch", sys_platform="== 'linux'"}
+torch = {version="*", markers = "sys_platform == 'win64' or sys_platform == 'darwin'"}
 numpy = "*"
 pandas = "*"
 matplotlib = "*"
