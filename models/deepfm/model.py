@@ -232,7 +232,7 @@ class LogitsLayer(nn.Module):
             in_features: feature size of input. This is sum of each dims of dense embedding, deep and fm component outputs.
         """
         super().__init__()
-        self.model: nn.Module = nn.Sequential(nn.Linear(in_features, 1))
+        self.model = nn.Linear(in_features, 1)
 
     def forward(
         self, dense_embedded: torch.Tensor, deep_outputs: torch.Tensor, fm_outputs: torch.Tensor
